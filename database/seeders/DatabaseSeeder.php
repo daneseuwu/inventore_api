@@ -15,11 +15,24 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        User::updateOrCreate(
+            ['email' => 'admin@example.com'],
+            [
+                'name' => 'Admin',
+                'password' => 'password',
+                'role' => User::ROLE_ADMIN,
+            ]
+        );
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        User::updateOrCreate(
+            ['email' => 'empleado@example.com'],
+            [
+                'name' => 'Empleado',
+                'password' => 'password',
+                'role' => User::ROLE_EMPLOYEE,
+            ]
+        );
+
+        $this->call(DemoInventorySeeder::class);
     }
 }
